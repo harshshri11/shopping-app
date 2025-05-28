@@ -1,0 +1,106 @@
+/* -------------------- Toolbar Styling -------------------- */
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.849);
+}
+
+/* Toolbar buttons and spacing */
+.example-icon {
+  margin: 0 5px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+/* -------------------- Page Heading -------------------- */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #3f51b5;
+}
+
+/* -------------------- Slide Toggle -------------------- */
+mat-slide-toggle {
+  display: block;
+  margin: 0 auto 20px;
+}
+
+/* -------------------- Card Styling -------------------- */
+mat-card {
+  background-color: white;
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Card Header & Content Background */
+mat-card-header,
+mat-card-content {
+  background-color: white;
+}
+
+mat-card-content h4 {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  color: #ffffff; 
+}
+
+mat-card-image,
+mat-card-content img {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300 px, 1fr));
+  gap: 50px;
+  padding: 50px;
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.search-field {
+  width: 200px;
+  margin-right: 8px;
+}
+
+
+/* -------------------- Responsive Design -------------------- */
+@media (max-width: 768px) {
+  mat-card {
+    margin: 10px;
+  }
+
+  mat-card-content div img {
+    width: 80px;
+  }
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+

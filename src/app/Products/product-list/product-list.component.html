@@ -1,0 +1,47 @@
+
+
+
+<mat-grid-list cols="4" rowHeight="1:1.3" gutterSize="12px" *ngIf="products.length > 0">
+  <mat-grid-tile *ngFor="let product of products">
+    <mat-card class="product-card">
+      <mat-card-header>
+        <mat-card-title>{{ product.title | slice:0:10 }}{{ product.title.length > 10 ? '...' : '' }}</mat-card-title>
+      </mat-card-header>
+
+      <img
+        *ngIf="product.images && product.images.length > 0"
+        mat-card-image
+        [src]="product.images[0]"
+        alt="{{ product.title }}"
+        class="product-image"
+      />
+
+
+
+
+    <mat-card-content>
+        <p>{{ product.description | slice:0:10 }}{{ product.description.length > 10 ? '...' : '' }}</p>
+
+  <div *ngIf="!product.showCurrency">
+    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+  </div>
+  <div *ngIf="product.showCurrency">
+    <p><strong>USD:</strong> {{ convertCurrency(product.price, 'USD') }}</p>
+    <p><strong>EUR:</strong> {{ convertCurrency(product.price, 'EUR') }}</p>
+  </div>
+
+  <!-- Toggle price display without refetching -->
+  <button mat-button (click)="product.showCurrency = !product.showCurrency">
+    {{ product.showCurrency ? 'Show in ₹' : 'Show in $/€' }}
+  </button>
+  
+  <button mat-button color="warn" (click)="delete.emit(product.id)">Delete</button>
+</mat-card-content>
+
+     
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
