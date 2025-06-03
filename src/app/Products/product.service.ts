@@ -9,9 +9,10 @@ import { Product } from './product-form/product-form.component';
 
 
 export class ProductService {
-  addProduct(product: Product) {
-    throw new Error('Method not implemented.');
-  }
+  addProduct(product: Product): Observable<any> {
+  return this.createProduct(product);
+}
+
   
   constructor(private http: HttpClient) {}
 
@@ -30,5 +31,4 @@ export class ProductService {
     return this.http.delete(`${environment.apiUrl}/${id}`);
   }
 }
-
 

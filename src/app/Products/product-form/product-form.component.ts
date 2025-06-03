@@ -7,7 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductService } from '../product.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+
 export interface Product {
+  id: number;
   title: string;
   price: number;
   description: string;
@@ -33,15 +35,16 @@ export interface Product {
 export class ProductFormComponent {
   @Output() formSubmitted = new EventEmitter<Product>();
 
+  
   product: Product = {
     title: '',
     price: 1,
     description: '',
     categoryId: 0,
-    images: []
+    images: [],
+    id: 0
   };
 
-  
   newImage = '';
 
   addImage(): void {
@@ -54,6 +57,7 @@ export class ProductFormComponent {
 
 constructor(private productService: ProductService) {}
 
+
 onSubmit(): void {
   const { title, description, price, categoryId, images } = this.product;
   if (!title || !description || price <= 0 || categoryId <= 0 || images.length === 0) {
@@ -62,17 +66,16 @@ onSubmit(): void {
   }
   console.log('Submitted product:', this.product);
 
-
   this.formSubmitted.emit(this.product);
   this.product = {
     title: '',
     price: 1,
     description: '',
     categoryId: 0,
-    images: []
+    images: [],
+    id: 0,
   };
   this.newImage = '';
   alert("Product is added");
 }
-
 }

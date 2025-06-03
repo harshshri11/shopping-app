@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
 import { ChangeDetectorRef } from '@angular/core';
-
+import { RouterModule } from '@angular/router';  // ✅ Add this
 
 
 
@@ -57,6 +57,7 @@ export interface Product {
     MatMenuModule,
     MatSelectModule,
     MatInputModule,
+    RouterModule,
 
 
   ],
@@ -134,23 +135,6 @@ export class AppComponent implements OnInit {
     );
   }
 
-
-  deleteProduct(productId: number) {
-    if(confirm("Are you really want to delete this product")){
-    this.productService.deleteProduct(productId).subscribe({
-      next: () => {
-        this.products = this.products.filter(p => p.id !== productId);
-        this.filteredProducts = this.filteredProducts.filter(p => p.id !== productId);
-      },
-      error: (err) => {
-        alert(`Delete failed: ${err.message || err.statusText}`);
-      }
-    });
-  }
-  this.cdr.detectChanges()
-  }
-
-
   submitForm() {
     if (this.selectedProduct.id) {
       console.log('Update product', this.selectedProduct);
@@ -178,5 +162,8 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/form']);
   }
 
-}
+  goToCart(){
+    this.router.navigate(['/cart']);
+  }
 
+}

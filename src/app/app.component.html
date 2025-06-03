@@ -10,6 +10,10 @@
     <mat-icon>home</mat-icon>
   </button>
 
+    <button mat-icon-button aria-label="Go to cart" (click)="goToCart()">
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+
  
   <button mat-icon-button aria-label="Toggle search" (click)="toggleSearch()">
     <mat-icon>search</mat-icon>
@@ -22,6 +26,8 @@
 </mat-menu>
 
 </mat-toolbar>
+<router-outlet></router-outlet>
+
 
 <div *ngIf="showSearch" style="padding: 10px;">
   <mat-form-field appearance="outline" style="width: 100%;">
@@ -31,8 +37,7 @@
 </div>
 
 <app-product-list
-  [products]="filteredProducts"
-  (delete)="deleteProduct($event)">
+  [products]="filteredProducts">
 </app-product-list>
 
 <app-product-form (formSubmit)="submitForm()"></app-product-form>

@@ -7,14 +7,17 @@ import { provideHttpClient, withFetch, withXsrfConfiguration } from '@angular/co
 import { routes } from './app/app.routes';
 import { provideRouter } from '@angular/router';
 
-
-
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
+    provideAnimations(), // ✅ Adds Angular animations (if you're using Material)
+    importProvidersFrom(HttpClientModule), // ✅ Fixes the HttpClient error
     provideHttpClient(
       withFetch(),
-      withXsrfConfiguration({ cookieName: 'XSRF-TOKEN', headerName: 'X-XSRF-TOKEN' }) // ✅ only valid options
+      withXsrfConfiguration({
+        cookieName: 'XSRF-TOKEN',
+        headerName: 'X-XSRF-TOKEN'
+      })
     )
   ]
 });

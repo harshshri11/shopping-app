@@ -1,0 +1,16 @@
+<h2>Your Cart</h2>
+<div *ngIf="cartItems.length === 0">Cart is empty.</div>
+<mat-card *ngFor="let product of cartItems" style="margin-bottom: 10px;">
+  <mat-card-title>{{ product.title }}</mat-card-title>
+  <mat-card-content>
+    <p>{{ product.description }}</p>
+    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="remove(product.id)">Remove</button>
+  </mat-card-actions>
+</mat-card>
+
+
+
+

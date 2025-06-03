@@ -7,6 +7,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { CartService } from '../../cart.service';
+import { Product } from '../../models/product.model';
+import { ProductService } from '../product.service';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -24,8 +28,10 @@ import { HttpClient } from '@angular/common/http';
 export class ProductListComponent implements OnChanges {
   @Input() products: any[] = [];
   @Output() delete = new EventEmitter<number>();
+  filteredProducts: Product[] = [];
   exchangeRates: { USD: number, EUR: number } = { USD: 0, EUR: 0 };
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient, private cartService: CartService, private productService: ProductService, private cdr: ChangeDetectorRef) {}
 
 
   ngOnChanges(changes: SimpleChanges) {
@@ -72,6 +78,27 @@ convertCurrency(price: number, toCurrency: 'USD' | 'EUR'): string {
   const converted = price * this.exchangeRates[toCurrency];
   return `${toCurrency} ${converted.toFixed(2)}`;
 }
+
+ deleteProduct(productId: number) {
+    if(confirm("Are you really want to delete this product")){
+    this.productService.deleteProduct(productId).subscribe({
+      next: () => {
+        this.products = this.products.filter(p => p.id !== productId);
+        this.filteredProducts = this.filteredProducts.filter(p => p.id !== productId);
+      },
+      error: (err) => {
+        alert(`Delete failed: ${err.message || err.statusText}`);
+      }
+    });
+  }
+  this.cdr.detectChanges()
+  }
+
+
+addToCart(product: Product) {
+    this.cartService.addToCart(product);
+    alert(`${product.title} added to cart!`);
+  }
 
 
 }
