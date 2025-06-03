@@ -64,18 +64,26 @@ onSubmit(): void {
     alert('Please fill out all fields correctly and add at least one image.');
     return;
   }
-  console.log('Submitted product:', this.product);
 
-  this.formSubmitted.emit(this.product);
-  this.product = {
-    title: '',
-    price: 1,
-    description: '',
-    categoryId: 0,
-    images: [],
-    id: 0,
-  };
-  this.newImage = '';
-  alert("Product is added");
+  this.productService.createProduct(this.product).subscribe({
+    next: (res) => {
+      console.log('Product added:', res);
+      alert('Product successfully added!');
+      this.product = {
+        title: '',
+        price: 1,
+        description: '',
+        categoryId: 0,
+        images: [],
+        id: 0
+      };
+      this.newImage = '';
+    },
+    error: (err) => {
+      alert('Failed to add product.');
+      console.error(err);
+    }
+  });
 }
 }
+

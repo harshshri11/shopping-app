@@ -86,9 +86,26 @@ export class AppComponent implements OnInit {
   title: '',
   description: '',
   price: null,
-  categoryId: null,
+  category: {
+    id: null,
+    name: '',
+    image: '',
+  },
   image: ''
 };
+
+
+resetForm() {
+  this.selectedProduct = {
+    id: null,
+    title: '',
+    description: '',
+    price: null,
+    categoryId: null,
+    image: ''
+  };
+}
+
 
   title = 'Shopping app';
 
@@ -132,15 +149,6 @@ export class AppComponent implements OnInit {
       product.title.toLowerCase().includes(term)
     );
   }
-
-  submitForm() {
-    if (this.selectedProduct.id) {
-      console.log('Update product', this.selectedProduct);
-    } else {
-      console.log('Add new product', this.selectedProduct);
-    }
-  }
-
   
   sortProducts(order: 'high-to-low' | 'low-to-high'): void {
   if (order === 'high-to-low') {
