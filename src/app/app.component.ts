@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, inject, OnInit } from '@angular/cor
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './Products/product.service';
 import { ProductListComponent } from './Products/product-list/product-list.component';
-import { ProductFormComponent } from './Products/product-form/product-form.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
@@ -47,7 +46,6 @@ export interface Product {
     MatToolbarModule,
     MatIconModule,
     ProductListComponent,
-    ProductFormComponent,
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
