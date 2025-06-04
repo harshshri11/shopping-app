@@ -1,15 +1,21 @@
-// cart.component.ts
-import { Component, OnInit ,computed} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart.service';
 import { Product } from '../models/product.model';
-import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
-@Component({
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar'; @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [MatCardModule,CommonModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+  ],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
@@ -19,11 +25,10 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-  this.cartService.cart$.subscribe(items => this.cartItems = items);
+    this.cartService.cart$.subscribe(items => this.cartItems = items);
   }
-  
+
   remove(id: number) {
     this.cartService.removeFromCart(id);
   }
-
 }
